@@ -8,7 +8,7 @@ const Keyboard: React.FC = () => {
     ], [
         'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'
     ], [
-        'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACKSPACE'
+        'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'
     ]];
 
     return (
