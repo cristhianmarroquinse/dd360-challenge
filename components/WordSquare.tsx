@@ -151,7 +151,7 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
     if(variant === WordSquareVariants.KeyBoard){
         return (
             <div 
-                style={{ 
+                style={{
                     backgroundColor: getKeyBackgroundColor(),
                     height: `${size+6}px`,
                     width: `${size}px`,
@@ -163,15 +163,15 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                     }
                 }}
             >
-                <input 
+                <input
                     style={{
                         height: `${size+6}px`,
                         width: `${size}px`,
                         color: getKeyFontColor(),
-                    }} 
+                    }}
                     className={`focus:outline-none cursor-pointer text-center dark:text-white text-black text-xl font-extrabold`}
                     type='text'
-                    value={value} 
+                    value={value}
                     disabled
                 />
             </div>

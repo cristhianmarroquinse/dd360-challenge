@@ -41,8 +41,7 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setWrongPlaceKeys,
         wrongPlaceKeys,
         setWrongKeys,
-        wrongKeys,
-        wordsArrayRefs
+        wrongKeys
     } = useGlobalContext();
 
     const { countdown } = useCountdown({callback: () => {
@@ -57,10 +56,6 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setWrongPlaceKeys([]);
         setWrongKeys([]);
     }});
-
-    useEffect(() => {
-        console.log(wordsArrayRefs)
-    }, [wordsArrayRefs])
 
     useEffect(() => {
         console.log(currentWord)
