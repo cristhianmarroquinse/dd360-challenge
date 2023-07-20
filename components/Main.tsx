@@ -48,7 +48,6 @@ const Main: React.FC<MainProps> = ({ words }) => {
     }});
 
     useEffect(() => {
-        console.log('countdown', countdown)
         setTimer(countdown);
     }, [countdown])
 
@@ -68,15 +67,12 @@ const Main: React.FC<MainProps> = ({ words }) => {
 
     useEffect(() => {
         compareWords();
-        console.log('currentRow', currentRow)
     }, [currentRow])
 
     useEffect(() => {
-        console.log('currentWord', currentWord);
     }, [currentWord])
 
     useEffect(() => {
-        console.log('wordsPlayerd', wordsPlayerd);
     }, [wordsPlayerd])
 
     const rowIsCompleted = () => {
