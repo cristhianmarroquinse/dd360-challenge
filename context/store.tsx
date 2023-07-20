@@ -109,7 +109,7 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
     const wordsArrayRefs = useRef<HTMLInputElement[]>([]);
     const [wordsArray, setWordsArray] = useState<string[]>(Array(ROWS*COLUMNS).fill(''));
     const [isStatisticsModalOpen, setStatisticsModalOpen] = useState<boolean>(false);
-    const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState<boolean>(false);
+    const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState<boolean>(true);
     const [playsCounter, setPlaysCounter] = useState<number>(0);
     const [victories, setVitories] = useState<number>(0);
     const [currentRow, setCurrentRow] = useState<number>(0);
