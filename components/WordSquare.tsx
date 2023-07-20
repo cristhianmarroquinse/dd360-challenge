@@ -158,7 +158,9 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                 }}
                 className={`rounded-md ${bordered && 'border-[1px] border-black'}`}
                 onClick={() => {
-                    setWordsArray([...wordsArray.slice(0, currentPosition), value, ...wordsArray.slice(currentPosition + 1)]);
+                    if(value !== 'ENTER' && value !== '⌫'){
+                        setWordsArray([...wordsArray.slice(0, currentPosition), value, ...wordsArray.slice(currentPosition + 1)]);
+                    }
                 }}
             >
                 <input 
