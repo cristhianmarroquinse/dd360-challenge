@@ -24,7 +24,9 @@ module.exports = {
         'wordle-gray-light': '#939D9F4D',
         'light-bg': '#F9F9F9',
         'dark-bg': '#262b3ce3',
-        'dark-solid-bg': '#262B3C'
+        'dark-solid-bg': '#262B3C',
+        'keyboard-bg': '#dadce04d',
+        'keyboard-bg-dark': '#dadce008',
       },
     },
   },

@@ -27,7 +27,7 @@ const Header: React.FC = () => {
     }
     
     return (
-        <div className="dark:bg-dark-solid-bg bg-[#F3F3F3] flex flex-row justify-center text-center p-5 rounded-2xl w-[700px] m-auto my-20">
+        <div className="dark:bg-dark-solid-bg bg-[#F3F3F3] flex flex-row justify-center text-center p-5 rounded-2xl w-[700px] m-auto mt-16 mb-14">
             <div className="basis-1/6 grid justify-center">
                 <Image
                     priority
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
                     onClick={() => setIsInstructionsModalOpen(!isInstructionsModalOpen)}
                 />
             </div>
-            <div className="basis-4/6 text-gray-900 text-4xl text-center">WORDLE</div>
+            <div className="basis-4/6 dark:text-white text-gray-900 text-4xl text-center">WORDLE</div>
             <div className="basis-1/6 grid grid-flow-col gap-2 justify-center items-center">
                 <Image
                     priority

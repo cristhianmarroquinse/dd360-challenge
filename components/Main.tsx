@@ -8,6 +8,7 @@ import StatisticsModal from "@/components/StatisticsModal";
 import InstructionsModal from "@/components/InstructionsModal";
 import { useCountdown } from '@/hooks/useCountdown';
 import { ThemeProvider } from 'next-themes'
+import Keyboard from "@/components/Keyboard";
 
 interface MainProps {
     words: string[];
@@ -35,6 +36,12 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setIsGameOnHold,
         setTimer,
         setDisplayLastWord,
+        setInPlaceKeys,
+        inPlaceKeys,
+        setWrongPlaceKeys,
+        wrongPlaceKeys,
+        setWrongKeys,
+        wrongKeys,
     } = useGlobalContext();
 
     const { countdown } = useCountdown({callback: () => {
@@ -45,7 +52,14 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setWordsArray(Array(COLUMNS * ROWS).fill(''));
         setRandomWord();
         setDisplayLastWord(false);
+        setInPlaceKeys([]);
+        setWrongPlaceKeys([]);
+        setWrongKeys([]);
     }});
+
+    useEffect(() => {
+        console.log(currentWord)
+    }, [currentWord])
 
     useEffect(() => {
         setTimer(countdown);
@@ -114,9 +128,30 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setIsGameOnHold(true);
     }
 
+    const compareByChar = (currentWordRow: string) => {
+        const inPlaceKeysAux = [...inPlaceKeys];
+        const wrongPlaceKeysAux = [...wrongPlaceKeys];
+        const wrongKeysAux = [...wrongKeys];
+        
+        for (let i = 0; i < COLUMNS; i++) {
+            if (currentWord.charAt(i) === currentWordRow.charAt(i)) {
+                inPlaceKeysAux.push(currentWordRow.charAt(i));
+                wrongPlaceKeysAux.splice(wrongPlaceKeysAux.indexOf(currentWordRow.charAt(i)), 1);
+            } else if (currentWord.includes(currentWordRow.charAt(i))) {
+                wrongPlaceKeysAux.push(currentWordRow.charAt(i));
+            } else {
+                wrongKeysAux.push(currentWordRow.charAt(i));
+            }
+        }
+        setInPlaceKeys(inPlaceKeysAux);
+        setWrongPlaceKeys(wrongPlaceKeysAux);
+        setWrongKeys(wrongKeysAux);
+    }
+
     const compareWords = () => {
         if (!currentRow) return;
         const currentWordRow = getCurrentWordRow();
+        compareByChar(currentWordRow);
         if (currentWordRow === currentWord) {
             setVitories(victories + 1);
             playIsOver();
@@ -130,6 +165,7 @@ const Main: React.FC<MainProps> = ({ words }) => {
         <ThemeProvider enableSystem={true} attribute="class">
             <Header />
             <Board />
+            <Keyboard />
             <StatisticsModal />
             <InstructionsModal />
         </ThemeProvider>

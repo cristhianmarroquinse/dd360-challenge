@@ -12,10 +12,10 @@ const Board: React.FC = () => {
   } = useGlobalContext();
 
   return (
-    <div style={{ gridTemplateColumns: `repeat(${COLUMNS}, minmax(0, 1fr))`}} className='grid gap-[11px] w-[420px] m-auto'>
-      {wordsArray.map((word, index) => {
-        return <WordSquare key={index} variant={WordSquareVariants.MainBoard} value={word} position={index} size={76} />
-      })}
+    <div style={{ gridTemplateColumns: `repeat(${COLUMNS}, minmax(0, 1fr))`}} className='grid gap-[11px] w-[350px] m-auto'>
+      {wordsArray.map((word, index) => 
+        <WordSquare key={index} variant={WordSquareVariants.MainBoard} value={word} position={index} size={60} />
+      )}
     </div>
   );
 };

@@ -42,6 +42,12 @@ interface ContextProps {
     setTimer: Dispatch<SetStateAction<number[]>>;
     displayLastWord: boolean;
     setDisplayLastWord: Dispatch<SetStateAction<boolean>>;
+    inPlaceKeys: string[];
+    setInPlaceKeys: Dispatch<SetStateAction<string[]>>;
+    wrongPlaceKeys: string[];
+    setWrongPlaceKeys: Dispatch<SetStateAction<string[]>>;
+    wrongKeys: string[];
+    setWrongKeys: Dispatch<SetStateAction<string[]>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -77,6 +83,12 @@ const GlobalContext = createContext<ContextProps>({
     setTimer: () => { },
     displayLastWord: false,
     setDisplayLastWord: () => { },
+    inPlaceKeys: [],
+    setInPlaceKeys: () => { },
+    wrongPlaceKeys: [],
+    setWrongPlaceKeys: () => { },
+    wrongKeys: [],
+    setWrongKeys: () => { },
 });
 
 
@@ -100,6 +112,9 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
     const [isGameOnHold, setIsGameOnHold] = useState<boolean>(false);
     const [timer, setTimer] = useState<number[]>([5, 0]);
     const [displayLastWord, setDisplayLastWord] = useState<boolean>(false);
+    const [inPlaceKeys, setInPlaceKeys] = useState<string[]>([]);
+    const [wrongPlaceKeys, setWrongPlaceKeys] = useState<string[]>([]);
+    const [wrongKeys, setWrongKeys] = useState<string[]>([]);
 
     return (
         <GlobalContext.Provider value={{
@@ -134,7 +149,13 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
             timer,
             setTimer,
             displayLastWord,
-            setDisplayLastWord
+            setDisplayLastWord,
+            inPlaceKeys,
+            setInPlaceKeys,
+            wrongPlaceKeys,
+            setWrongPlaceKeys,
+            wrongKeys,
+            setWrongKeys
         }}>
             {children}
         </GlobalContext.Provider>

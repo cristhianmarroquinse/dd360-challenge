@@ -25,6 +25,9 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
         currentRow,
         currentWord,
         isGameOnHold,
+        inPlaceKeys,
+        wrongPlaceKeys,
+        wrongKeys,
     } = useGlobalContext();
 
     const {theme} = useTheme();
@@ -48,11 +51,40 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
         return WRONG_WORD_COLOR;
     }
 
+    const getKeyBackgroundColor = () => {
+        if(theme === Themes.Light){
+            if(inPlaceKeys.includes(value)) return IN_PLACE_COLOR;
+            if(wrongPlaceKeys.includes(value)) return WRONG_PLACE_COLOR;
+            if(wrongKeys.includes(value)) return WRONG_WORD_COLOR;
+            return '#D3D6DA'
+        }
+        if(theme === Themes.Dark){ 
+            if(inPlaceKeys.includes(value)) return IN_PLACE_COLOR;
+            if(wrongPlaceKeys.includes(value)) return WRONG_PLACE_COLOR;
+            if(wrongKeys.includes(value)) return WRONG_WORD_COLOR;
+            return '#565F7E'
+        }
+        return '#D3D6DA'
+    }
+
+    const getKeyFontColor = () => {
+        if(theme === Themes.Light){
+            if(inPlaceKeys.includes(value)) return '#FFF';
+            if(wrongPlaceKeys.includes(value)) return '#FFF';
+            if(wrongKeys.includes(value)) return '#FFF';
+            return '#000'
+        }
+        if(theme === Themes.Dark){
+            return '#FFF'
+        }
+        return '#000'
+    }
+
     if(variant === WordSquareVariants.MainBoard) {
         return (
             <div 
                 style={{ 
-                    backgroundColor: `${setColor()}`,
+                    backgroundColor: setColor(),
                     height: `${size}px`,
                     width: `${size}px`,
                 }} 
@@ -63,7 +95,7 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                         height: `${size}px`,
                         width: `${size}px`,
                     }} 
-                    className={`focus:outline-none text-center bg-transparent text-white text-4xl font-extrabold`}
+                    className={`focus:outline-none text-center bg-transparent text-white text-3xl font-extrabold`}
                     type='text' 
                     onChange={handleChangeWord} 
                     value={value} 
@@ -100,7 +132,30 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
         )
     }
 
-    
+    if(variant === WordSquareVariants.KeyBoard){
+        return (
+            <div 
+                style={{ 
+                    backgroundColor: getKeyBackgroundColor(),
+                    height: `${size+6}px`,
+                    width: `${size}px`,
+                }}
+                className={`rounded-md ${bordered && 'border-[1px] border-black'}`}
+            >
+                <input 
+                    style={{
+                        height: `${size+6}px`,
+                        width: `${size}px`,
+                        color: getKeyFontColor(),
+                    }} 
+                    className={`focus:outline-none text-center dark:text-white text-black text-xl font-extrabold`}
+                    type='text'
+                    value={value} 
+                    disabled
+                />
+            </div>
+        )
+    }
 }
 
 export default WordSquare;
