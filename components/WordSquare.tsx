@@ -28,6 +28,9 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
         inPlaceKeys,
         wrongPlaceKeys,
         wrongKeys,
+        wordsArrayRefs,
+        currentPosition,
+        setCurrentPosition
     } = useGlobalContext();
 
     const {theme} = useTheme();
@@ -96,8 +99,21 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                         width: `${size}px`,
                     }} 
                     className={`focus:outline-none text-center bg-transparent text-white text-3xl font-extrabold`}
+                    ref={(e) => {
+                        if (e && !wordsArrayRefs.current.includes(e)) {
+                            wordsArrayRefs.current.push(e);
+                        }
+                    }}
+                    onKeyUp={(e) => {
+                        if(e.key === 'Backspace' && position > 0){
+                            wordsArrayRefs.current[position - 1].focus();
+                        } else {
+                            wordsArrayRefs.current[position + 1]?.focus();
+                        }
+                    }}
+                    onFocus={() => setCurrentPosition(position)}
                     type='text' 
-                    onChange={handleChangeWord} 
+                    onChange={handleChangeWord}
                     value={value} 
                     disabled={Math.floor(position / 5) !== currentRow || isGameOnHold}
                 />
@@ -141,6 +157,9 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                     width: `${size}px`,
                 }}
                 className={`rounded-md ${bordered && 'border-[1px] border-black'}`}
+                onClick={() => {
+                    setWordsArray([...wordsArray.slice(0, currentPosition), value, ...wordsArray.slice(currentPosition + 1)]);
+                }}
             >
                 <input 
                     style={{
@@ -148,7 +167,7 @@ const WordSquare: React.FC<WordSquareProps> = ({ variant, value, position = 0, c
                         width: `${size}px`,
                         color: getKeyFontColor(),
                     }} 
-                    className={`focus:outline-none text-center dark:text-white text-black text-xl font-extrabold`}
+                    className={`focus:outline-none cursor-pointer text-center dark:text-white text-black text-xl font-extrabold`}
                     type='text'
                     value={value} 
                     disabled

@@ -42,6 +42,7 @@ const Main: React.FC<MainProps> = ({ words }) => {
         wrongPlaceKeys,
         setWrongKeys,
         wrongKeys,
+        wordsArrayRefs
     } = useGlobalContext();
 
     const { countdown } = useCountdown({callback: () => {
@@ -56,6 +57,10 @@ const Main: React.FC<MainProps> = ({ words }) => {
         setWrongPlaceKeys([]);
         setWrongKeys([]);
     }});
+
+    useEffect(() => {
+        console.log(wordsArrayRefs)
+    }, [wordsArrayRefs])
 
     useEffect(() => {
         console.log(currentWord)
@@ -132,7 +137,7 @@ const Main: React.FC<MainProps> = ({ words }) => {
         const inPlaceKeysAux = [...inPlaceKeys];
         const wrongPlaceKeysAux = [...wrongPlaceKeys];
         const wrongKeysAux = [...wrongKeys];
-        
+
         for (let i = 0; i < COLUMNS; i++) {
             if (currentWord.charAt(i) === currentWordRow.charAt(i)) {
                 inPlaceKeysAux.push(currentWordRow.charAt(i));

@@ -6,6 +6,7 @@ import {
     Dispatch,
     SetStateAction,
     useState,
+    useRef,
 } from 'react';
 import { Themes } from '@/types/enums';
 
@@ -48,6 +49,9 @@ interface ContextProps {
     setWrongPlaceKeys: Dispatch<SetStateAction<string[]>>;
     wrongKeys: string[];
     setWrongKeys: Dispatch<SetStateAction<string[]>>;
+    wordsArrayRefs: React.MutableRefObject<HTMLInputElement[]>;
+    currentPosition: number;
+    setCurrentPosition: Dispatch<SetStateAction<number>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -89,6 +93,9 @@ const GlobalContext = createContext<ContextProps>({
     setWrongPlaceKeys: () => { },
     wrongKeys: [],
     setWrongKeys: () => { },
+    wordsArrayRefs: {current: []},
+    currentPosition: 0,
+    setCurrentPosition: () => { },
 });
 
 
@@ -99,6 +106,7 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
     const IN_PLACE_COLOR = '#66A060';
     const WRONG_PLACE_COLOR = '#CEB02C';
     const WRONG_WORD_COLOR = '#939B9F';
+    const wordsArrayRefs = useRef<HTMLInputElement[]>([]);
     const [wordsArray, setWordsArray] = useState<string[]>(Array(ROWS*COLUMNS).fill(''));
     const [isStatisticsModalOpen, setStatisticsModalOpen] = useState<boolean>(false);
     const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState<boolean>(false);
@@ -115,6 +123,7 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
     const [inPlaceKeys, setInPlaceKeys] = useState<string[]>([]);
     const [wrongPlaceKeys, setWrongPlaceKeys] = useState<string[]>([]);
     const [wrongKeys, setWrongKeys] = useState<string[]>([]);
+    const [currentPosition, setCurrentPosition] = useState<number>(0);
 
     return (
         <GlobalContext.Provider value={{
@@ -155,7 +164,10 @@ export const GlobalContextProvider: React.FC<any> = ({ children }) => {
             wrongPlaceKeys,
             setWrongPlaceKeys,
             wrongKeys,
-            setWrongKeys
+            setWrongKeys,
+            wordsArrayRefs,
+            currentPosition,
+            setCurrentPosition,
         }}>
             {children}
         </GlobalContext.Provider>
