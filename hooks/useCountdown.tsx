@@ -5,7 +5,7 @@ interface CountdownProps {
 }
 
 const useCountdown = ({callback}: CountdownProps) => {
-  const initialMinutes = 1;
+  const initialMinutes = 5;
   const [countdown, setCountdown] = useState<[number, number]>([initialMinutes, 0]);
   const [isRunning, setIsRunning] = useState<boolean>(true);
 
