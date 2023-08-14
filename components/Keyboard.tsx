@@ -1,5 +1,4 @@
-import { WordSquareVariants } from "@/types/enums";
-import WordSquare from "./WordSquare";
+import WordSquareKeyBoard from "./WordSquare/WordSquareKeyBoard";
 
 const Keyboard: React.FC = () => {
 
@@ -18,7 +17,7 @@ const Keyboard: React.FC = () => {
                     className={`grid grid-cols-10 w-[460px] m-auto mt-1.5 ${index === 1 && 'mr-1'}`} key={index}>
                     {
                         row.map((key, index) => (
-                            <WordSquare key={index} variant={WordSquareVariants.KeyBoard} value={key} position={index} size={40} />
+                            <WordSquareKeyBoard key={index} value={key} size={40} />
                         ))
                     }
                 </div>

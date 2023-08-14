@@ -1,10 +1,7 @@
-'use client'
-
 import React from 'react';
 import { useGlobalContext } from "@/context/store";
 import Modal from '@/components/Modal';
-import WordSquare from './WordSquare';
-import { WordSquareVariants } from '@/types/enums';
+import WordSquareStatic from './WordSquare/WordSquareStatic';
 
 interface WordExample {
     char: string;
@@ -90,10 +87,9 @@ const InstructionsModal: React.FC = () => {
     const renderExample = (example: WordExample[]) => {
         return example.map((word, index) => {
             return (
-                <WordSquare 
-                    key={index} 
-                    variant={WordSquareVariants.Static} 
-                    value={word.char} 
+                <WordSquareStatic
+                    key={index}
+                    value={word.char}
                     color={word.bgColor}
                     bordered={word.bordered}
                     size={50}

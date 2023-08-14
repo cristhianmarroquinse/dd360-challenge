@@ -1,9 +1,6 @@
-'use client'
-
 import React from 'react';
 import { useGlobalContext } from "@/context/store";
-import WordSquare from "@/components/WordSquare";
-import { WordSquareVariants } from "@/types/enums";
+import WordSquareMainBoard from './WordSquare/WordSquareMainBoard';
 
 const Board: React.FC = () => {
   const {
@@ -14,7 +11,7 @@ const Board: React.FC = () => {
   return (
     <div style={{ gridTemplateColumns: `repeat(${COLUMNS}, minmax(0, 1fr))`}} className='grid gap-[11px] w-[350px] m-auto'>
       {wordsArray.map((word, index) => 
-        <WordSquare key={index} variant={WordSquareVariants.MainBoard} value={word} position={index} size={60} />
+        <WordSquareMainBoard key={index} value={word} position={index} size={60} />
       )}
     </div>
   );

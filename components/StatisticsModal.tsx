@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import { useGlobalContext } from "@/context/store";
 import Modal from '@/components/Modal';
